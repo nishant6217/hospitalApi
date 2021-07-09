@@ -67,23 +67,11 @@ module.exports.allReportsOfPatient = async (req, res) => {
 
 module.exports.allReportsOfStatus = async (req, res) => {
   try {
-    let report = await Patient.find({stauts:"negative"})
-      .select({ _id: 0, status: 0, createdAt: 0, updatedAt: 0, __v: 0 })
-      .populate({
-        path: "reports",
-        select: { _id: 0, of: 0, createdAt: 0, updatedAt: 0, __v: 0 },
-        populate: {
-          path: "createdBy",
-          select: {
-            _id: 0,
-            username: 0,
-            password: 0,
-            createdAt: 0,
-            updatedAt: 0,
-            __v: 0,
-          },
-        },
-      });
+    console.log(req.params.status, "!!!!!!");
+    console.log(typeof req.params.status, "@@@@@");
+    let report = await Patient.find({ status: req.params.status});
+    console.log(report);
+
     return res.status(200).json({
       message: `Reports of  Patients with ${req.params.status} status`,
       data: {
