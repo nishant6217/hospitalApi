@@ -7,7 +7,7 @@ const docAPI = require("../../../controllers/api/v1/doctor");
 
 router.post("/register", patAPI.register);
 router.get("/:id/all_reports", patAPI.allReportsOfPatient);
-router.get("/:status", patAPI.allReportsOfStatus);
+router.get("/reports/:status", patAPI.allReportsOfStatus);
 router.post(
   "/:id/create_report",
   passport.authenticate("jwt", { session: false }),
